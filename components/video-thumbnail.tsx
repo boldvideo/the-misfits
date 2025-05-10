@@ -25,13 +25,11 @@ export function VideoThumbnail({
   // Use flex-row or flex-row-reverse based on align
   const flexDirection = align === "right" ? "flex-row-reverse" : "flex-row";
   return (
-    <div
-      className={`flex ${flexDirection} items-start gap-12 mb-12 w-full  mx-auto`}
-    >
+    <div className={"mb-12 w-full mx-auto"}>
       <Link
         href={`/v/${video.id}`}
         prefetch={prefetch}
-        className="flex w-full"
+        className={`flex ${flexDirection} items-start gap-12 w-full`}
         style={{ textDecoration: "none", color: "inherit" }}
       >
         {/* Thumbnail */}
