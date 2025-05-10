@@ -1,0 +1,43 @@
+{
+  "name": "bold-nextjs-tailwindcss-starter",
+  "version": "0.3.4",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@boldvideo/bold-js": "0.4.2",
+    "@mux/mux-player-react": "^3.3.1",
+    "@types/node": "22.13.14",
+    "@types/react": "19.0.12",
+    "@types/react-dom": "19.0.4",
+    "@vercel/og": "^0.6.5",
+    "@vidstack/react": "^1.12.13",
+    "date-fns": "^4.1.0",
+    "eslint": "9.23.0",
+    "eslint-config-next": "15.2.4",
+    "lucide-react": "^0.484.0",
+    "next": "15.3.1-canary.12",
+    "next-themes": "^0.4.6",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "swr": "^2.3.3",
+    "typescript": "5.8.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.17",
+    "@tailwindcss/typography": "^0.5.16",
+    "autoprefixer": "^10.4.21",
+    "clsx": "^2.1.1",
+    "postcss": "^8.5.3",
+    "tailwind-merge": "^3.0.2",
+    "tailwindcss": "^4.0.17",
+    "tw-animate-css": "^1.2.4"
+  },
+  "packageManager": "pnpm@9.12.3+sha1.4fb96925d434c491285182acf29803bb9aa2e6e5"
+}
