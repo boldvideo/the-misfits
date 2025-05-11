@@ -39,7 +39,9 @@ export function Header({ logo, logoDark, menuItems }: HeaderProps) {
               >
                 {menuItems.map((item, idx) => (
                   <Link
-                    className="text-[12.8px] mr-[1vw] py-2 rounded-md hover:underline transition-colors"
+                    className={`text-[12.8px] mr-[1vw] py-2 rounded-md transition-colors ${
+                      item.label.toLowerCase() === "video" ? "underline" : ""
+                    }`}
                     key={`${item.label}-${idx}`}
                     href={item.url}
                   >
