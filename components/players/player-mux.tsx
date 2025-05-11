@@ -280,7 +280,6 @@ export const MuxPlayerComponent = forwardRef(function MuxPlayerComponent(
               ? "fixed sm:bottom-4 sm:right-4 sm:top-auto top-0 w-full sm:w-1/3 lg:w-1/4 bg-black z-50 rounded-lg shadow-lg"
               : "relative w-full h-full flex items-center justify-center"
           }
-          aspect-video 
         `}
         style={{
           // Make sure mini player has proper interactions

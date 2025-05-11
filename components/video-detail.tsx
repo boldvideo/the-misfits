@@ -13,6 +13,8 @@ import { AIAssistantProvider } from "./ui/ai-assistant/context";
 import { MobileContentTabs } from "./mobile-content-tabs";
 import { AIAssistant } from "./ui/ai-assistant";
 import { Space_Grotesk } from "next/font/google";
+import { timestampToSeconds, secondsToReadableTime } from "@/lib/utils/time";
+import { parseChapters } from "@/util/chapter-parser";
 
 // Define tab type for mobile navigation
 type TabId = "info" | "chapters" | "transcript" | "assistant";
@@ -47,13 +49,20 @@ interface VideoDetailProps {
   settings: Settings;
 }
 
+// Define Chapter interface
+interface Chapter {
+  startTime: string; // Readable format (MM:SS)
+  startTimeSeconds: number; // Time in seconds
+  title: string;
+}
+
 /**
  * Video detail page component showing a video player and metadata
  */
 export function VideoDetail({
   video,
   startTime,
-  className = "max-w-7xl",
+  className = "",
   settings,
 }: VideoDetailProps): React.JSX.Element {
   const playerRef = useRef<HTMLVideoElement | null>(null);
@@ -66,8 +75,9 @@ export function VideoDetail({
   // Add state for mobile tab navigation
   const [activeTab, setActiveTab] = useState<TabId>("info");
 
-  // Check if the video has chapters
-  const hasChapters = Boolean(video.chapters);
+  // Parse chapters and check validity
+  const parsedChapters = parseChapters(video.chapters);
+  const hasChapters = parsedChapters.length > 0;
 
   // Handle scroll behavior for floating player
   const handleScroll = useCallback(() => {
@@ -128,17 +138,17 @@ export function VideoDetail({
             className={clsx(
               "w-full max-w-[1600px]",
               // Only apply grid on desktop screens
-              video.chapters && "lg:grid lg:grid-cols-12 lg:space-y-0",
+              hasChapters && "lg:grid lg:grid-cols-12 lg:space-y-0",
               "overflow-hidden"
             )}
           >
-            <div className="aspect-video lg:max-h-[50vh] 2xl:max-h-[50vh] lg:aspect-auto w-full lg:h-full bg-black flex-grow lg:col-span-9">
+            <div className=" lg:h-[50vh] lg:aspect-auto w-full bg-black flex-grow lg:col-span-9">
               <Player
                 video={video}
                 autoPlay={true}
                 ref={playerRef}
                 startTime={startTime}
-                className={className}
+                className={`${className} w-full`}
                 isOutOfView={isOutOfView}
               />
             </div>
@@ -147,7 +157,7 @@ export function VideoDetail({
             {hasChapters && (
               <div className="hidden lg:block lg:col-span-3 bg-sidebar">
                 <ChapterList
-                  chaptersWebVTT={video.chapters}
+                  chapters={parsedChapters}
                   playbackId={video.playback_id}
                   onChapterClick={handleTimeSelect}
                 />
@@ -170,11 +180,15 @@ export function VideoDetail({
           {/* Info tab - show title, date, description */}
           {activeTab === "info" && (
             <div className="space-y-4">
-              <h1 className="text-2xl font-bold">{video.title}</h1>
-              <p className="text-muted-foreground">
+              <h1
+                className={`${spaceGrotesk.className} uppercase text-2xl font-bold`}
+              >
+                {video.title}
+              </h1>
+              <p className="text-muted-foreground font-[adaptive-mono]">
                 {formatRelative(new Date(video.published_at), new Date())}
               </p>
-              <div className="prose prose-sm dark:prose-invert max-w-none prose-p:my-4 prose-a:text-primary prose-a:hover:underline">
+              <div className="prose prose-sm dark:prose-invert max-w-none prose-p:my-4 prose-a:text-primary prose-a:hover:underline font-[adaptive-mono]">
                 <VideoDescription text={video.description || ""} />
               </div>
             </div>
@@ -183,7 +197,7 @@ export function VideoDetail({
           {/* Chapters tab */}
           {activeTab === "chapters" && hasChapters && (
             <ChapterList
-              chaptersWebVTT={video.chapters}
+              chapters={parsedChapters}
               playbackId={video.playback_id}
               onChapterClick={handleTimeSelect}
             />

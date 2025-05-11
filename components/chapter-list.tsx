@@ -20,49 +20,19 @@ interface Chapter {
  * Props for the ChapterList component
  */
 interface ChapterListProps {
-  chaptersWebVTT: string | null | undefined;
+  chapters: Chapter[];
   playbackId: string;
   onChapterClick: (timeInSeconds: number) => void;
 }
 
 /**
- * Parse WEBVTT chapters format into Chapter objects
- */
-const parseChapters = (webvttString: string | null | undefined): Chapter[] => {
-  if (!webvttString || !webvttString.includes("WEBVTT")) return [];
-
-  // Match chapter blocks using regex for more robustness
-  const chapterRegex =
-    /(\d{2}:\d{2}:\d{2}\.\d{3}|\d{2}:\d{2}\.\d{3}) --> .*\n(.+)/g;
-  const chapters: Chapter[] = [];
-  let match;
-
-  while ((match = chapterRegex.exec(webvttString)) !== null) {
-    const startTimeString = match[1]; // e.g., "00:00:15.200" or "00:15.200"
-    const title = match[2].trim();
-    const startTimeSeconds = timestampToSeconds(startTimeString);
-    const readableStartTime = secondsToReadableTime(startTimeSeconds);
-
-    chapters.push({
-      startTime: readableStartTime,
-      startTimeSeconds: startTimeSeconds,
-      title: title,
-    });
-  }
-
-  return chapters;
-};
-
-/**
  * Renders a list of video chapters from WEBVTT data.
  */
 export function ChapterList({
-  chaptersWebVTT,
+  chapters,
   playbackId,
   onChapterClick,
 }: ChapterListProps): React.JSX.Element | null {
-  const chapters = parseChapters(chaptersWebVTT);
-
   if (!chapters || chapters.length === 0) {
     return null; // Don't render anything if no chapters
   }

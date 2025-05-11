@@ -3,9 +3,15 @@
 import React, { useState } from "react";
 import { Info, ListOrdered, Search, MessageSquare } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Space_Grotesk } from "next/font/google";
 
 // Define the available tab types
 type TabId = "info" | "chapters" | "transcript" | "assistant";
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["500"],
+});
 
 interface MobileContentTabsProps {
   activeTab: TabId;
@@ -29,18 +35,19 @@ export function MobileContentTabs({
   return (
     <div className={cn("lg:hidden", className)}>
       {/* Tab Pills */}
-      <div className="flex justify-around py-2 border-t border-b border-border bg-background sticky top-0 z-10">
+      <div
+        className={` ${spaceGrotesk.className} uppercase flex justify-around py-2 border-t border-b border-border bg-background sticky top-0 z-10`}
+      >
         <button
           onClick={() => onTabChange("info")}
           className={cn(
-            "flex items-center gap-1 px-3 py-2 rounded-full transition-colors",
+            "uppercase flex items-center gap-1 px-3 py-2 transition-colors",
             activeTab === "info"
-              ? "text-primary bg-primary/10"
+              ? "text-background bg-foreground"
               : "text-muted-foreground hover:text-foreground"
           )}
           aria-pressed={activeTab === "info"}
         >
-          <Info size={20} />
           <span className="text-xs">Info</span>
         </button>
 
@@ -48,14 +55,13 @@ export function MobileContentTabs({
           <button
             onClick={() => onTabChange("chapters")}
             className={cn(
-              "flex items-center gap-1 px-3 py-2 rounded-full transition-colors",
+              "uppercase flex items-center gap-1 px-3 py-2 transition-colors",
               activeTab === "chapters"
-                ? "text-primary bg-primary/10"
+                ? "text-background bg-foreground"
                 : "text-muted-foreground hover:text-foreground"
             )}
             aria-pressed={activeTab === "chapters"}
           >
-            <ListOrdered size={20} />
             <span className="text-xs">Chapters</span>
           </button>
         )}
@@ -64,14 +70,13 @@ export function MobileContentTabs({
           <button
             onClick={() => onTabChange("transcript")}
             className={cn(
-              "flex items-center gap-1 px-3 py-2 rounded-full transition-colors",
+              "uppercase flex items-center gap-1 px-3 py-2 transition-colors",
               activeTab === "transcript"
-                ? "text-primary bg-primary/10"
+                ? "text-background bg-foreground"
                 : "text-muted-foreground hover:text-foreground"
             )}
             aria-pressed={activeTab === "transcript"}
           >
-            <Search size={20} />
             <span className="text-xs">Transcript</span>
           </button>
         )}
@@ -79,14 +84,13 @@ export function MobileContentTabs({
         <button
           onClick={() => onTabChange("assistant")}
           className={cn(
-            "flex items-center gap-1 px-3 py-2 rounded-full transition-colors",
+            "uppercase flex items-center gap-1 px-3 py-2 transition-colors",
             activeTab === "assistant"
-              ? "text-primary bg-primary/10"
+              ? "text-background bg-foreground"
               : "text-muted-foreground hover:text-foreground"
           )}
           aria-pressed={activeTab === "assistant"}
         >
-          <MessageSquare size={20} />
           <span className="text-xs">Ask AI</span>
         </button>
       </div>

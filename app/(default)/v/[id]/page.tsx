@@ -90,7 +90,7 @@ export default async function VideoPage({
         video={video}
         startTime={startTime}
         settings={settings}
-        className="max-w-7xl"
+        className=""
       />
     </>
   );

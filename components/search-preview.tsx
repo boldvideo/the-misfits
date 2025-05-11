@@ -12,6 +12,12 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { SearchHit } from "@/lib/search";
+import { Space_Grotesk } from "next/font/google";
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["500"],
+});
 
 function formatTime(seconds: number) {
   const minutes = Math.floor(seconds / 60);
@@ -123,10 +129,12 @@ export function SearchPreview() {
             </div>
           ) : error ? (
             <div className="py-8 px-4 flex flex-col items-center justify-center text-sm">
-              <p className="font-medium text-lg text-destructive">
+              <p
+                className={`font-medium text-lg text-destructive ${spaceGrotesk.className}`}
+              >
                 Search Error
               </p>
-              <p className="text-sm mt-2 text-muted-foreground text-center max-w-xs">
+              <p className="text-sm font-[adaptive-mono] mt-2 text-muted-foreground text-center max-w-xs">
                 {error}
               </p>
             </div>
@@ -166,12 +174,14 @@ export function SearchPreview() {
                         href={`/v/${hit.short_id || hit.internal_id}`}
                         className="block group"
                       >
-                        <h3 className="text-xl font-semibold mb-2 group-hover:text-primary">
+                        <h3
+                          className={`text-xl uppercase font-semibold mb-2 group-hover:text-primary ${spaceGrotesk.className}`}
+                        >
                           {hit.title || "Untitled"}
                         </h3>
                       </Link>
                       {hit.description && (
-                        <p className="text-sm text-sidebar-foreground mb-3">
+                        <p className="text-sm font-[adaptive-mono] text-sidebar-foreground mb-3 line-clamp-3">
                           {hit.description}
                         </p>
                       )}

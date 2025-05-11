@@ -7,6 +7,12 @@ import { useAIAssistant, Message } from "./use-ai-assistant";
 import { useAIStream } from "./use-ai-stream";
 import { timestampToSeconds } from "@/lib/utils/time";
 import { useAIAssistantContext } from "./context";
+import { Space_Grotesk } from "next/font/google";
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["500"],
+});
 
 /**
  * Props for the AIAssistant component
@@ -263,7 +269,7 @@ export const AIAssistant = ({
         <div
           ref={scrollContainerRef}
           onClick={handleTimestampInteraction}
-          className="flex-1 min-h-0 overflow-y-auto"
+          className="flex-1 min-h-0 overflow-y-auto font-[adaptive-mono]"
         >
           {/* Welcome message */}
           <div className="mb-4">
@@ -277,7 +283,7 @@ export const AIAssistant = ({
               />
               <strong>{name}</strong>
             </div>
-            <div className="rounded-lg p-3 bg-primary text-primary-foreground ml-4">
+            <div className=" p-3 bg-foreground text-background">
               <p>
                 {userName ? `Hi ${userName}!` : "Hello there!"} I&apos;m {name},
                 your AI assistant. How can I help you with this video?
@@ -292,8 +298,8 @@ export const AIAssistant = ({
                 className={cn(
                   "rounded-lg p-3 prose prose-sm max-w-none prose-p:my-0 prose-strong:text-inherit prose-headings:text-inherit",
                   message.role === "user"
-                    ? "bg-muted text-foreground"
-                    : "bg-primary text-primary-foreground ml-4"
+                    ? "bg-muted text-foreground ml-4"
+                    : "bg-foreground text-background"
                 )}
               >
                 <div
@@ -329,7 +335,7 @@ export const AIAssistant = ({
                 }
               }}
               placeholder="Ask me something about this video..."
-              className="w-full bg-muted text-foreground rounded-full py-2 px-4 pr-10"
+              className="w-full bg-muted font-[adaptive-mono] text-foreground rounded-full py-2 px-4 pr-10"
             />
             {inputValue && (
               <button
@@ -372,7 +378,9 @@ export const AIAssistant = ({
           height={60}
           className="rounded-full"
         />
-        <span className="ml-2 font-bold">Ask {name}</span>
+        <span className={`${spaceGrotesk.className} uppercase ml-2 font-bold`}>
+          Ask {name}
+        </span>
       </button>
 
       {/* Sidebar Content */}
@@ -416,7 +424,7 @@ export const AIAssistant = ({
           {/* Messages Area */}
           <div
             ref={scrollContainerRef}
-            className="flex-1 min-h-0 overflow-y-auto"
+            className="flex-1 min-h-0 overflow-y-auto font-[adaptive-mono]"
             onClick={handleTimestampInteraction}
           >
             {/* Welcome message */}
@@ -446,7 +454,7 @@ export const AIAssistant = ({
                     "rounded-lg p-3 mx-4 prose prose-sm max-w-none dark:prose-invert prose-p:my-0 prose-strong:text-inherit prose-headings:text-inherit",
                     message.role === "user"
                       ? "bg-background mr-8 text-foreground"
-                      : "bg-primary text-primary-foreground ml-8"
+                      : "bg-foreground text-background ml-8"
                   )}
                 >
                   <div
@@ -481,7 +489,7 @@ export const AIAssistant = ({
                   }
                 }}
                 placeholder="Ask me something about this video..."
-                className="w-full bg-background text-foreground rounded-full py-2 px-4 pr-10"
+                className="w-full bg-background font-[adaptive-mono] text-foreground rounded-full py-2 px-4 pr-10"
               />
               {inputValue && (
                 <button
@@ -493,7 +501,7 @@ export const AIAssistant = ({
                 </button>
               )}
             </div>
-            <p className="text-xs text-foreground-muted mt-2">
+            <p className="text-xs font-[adaptive-mono] text-foreground-muted mt-2">
               Mistakes can happen, we&apos;re all human after all. 😉
             </p>
           </div>
