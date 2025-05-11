@@ -51,7 +51,7 @@ export function Header({ logo, logoDark, menuItems }: HeaderProps) {
               </div>
             </div>
             {/* Logo */}
-            <Link href="/" className=" hidden lg:block">
+            <Link href="/" className="hidden lg:block mx-auto">
               <Image
                 src={logo}
                 alt="Logo"
