@@ -142,13 +142,13 @@ export function VideoDetail({
               "overflow-hidden"
             )}
           >
-            <div className=" lg:h-[50vh] lg:aspect-auto w-full bg-black flex-grow lg:col-span-9">
+            <div className="aspect-video max-h-[30vh] h-full lg:max-h-none lg:h-[50vh] lg:aspect-auto w-full bg-black flex-grow lg:col-span-9">
               <Player
                 video={video}
                 autoPlay={true}
                 ref={playerRef}
                 startTime={startTime}
-                className={`${className} w-full`}
+                className={`${className} w-full h-full`}
                 isOutOfView={isOutOfView}
               />
             </div>
