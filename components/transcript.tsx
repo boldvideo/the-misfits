@@ -114,7 +114,7 @@ export function Transcript({
             key={`utterance-${idx}`}
             className={`utterance border-l-4 ${
               idx === activeUtteranceIndex
-                ? "border-primary"
+                ? "border-foreground"
                 : "border-muted-foreground"
             } pl-5 py-2 cursor-pointer transition-colors duration-200`}
             onClick={() => handleCueClick(utterance.start)}
@@ -125,11 +125,11 @@ export function Transcript({
               >
                 Speaker {utterance.speaker}
               </span>
-              <span className="font-[adaptive-mono] text-sm bg-primary ml-2 px-2 py-1 rounded text-primary-foreground">
+              <span className="font-[adaptive-mono] text-sm bg-foreground ml-2 px-2 py-1 rounded text-background">
                 {formatTimestamp(utterance.start)}
               </span>
             </div>
-            <div className="font-[adaptive-mono] p-2 rounded-md text-[17px] max-w-[42rem] leading-7 tracking-wide hover:bg-primary hover:text-primary-foreground">
+            <div className="font-[adaptive-mono] p-2 rounded-md text-[17px] max-w-[42rem] leading-7 tracking-wide hover:bg-foreground hover:text-background">
               {utterance.text}
             </div>
           </div>
