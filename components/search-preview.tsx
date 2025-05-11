@@ -34,7 +34,7 @@ function parseHighlightedText(text: string) {
       return (
         <mark
           key={index}
-          className="bg-primary text-primary-foreground font-medium rounded px-1"
+          className="bg-foreground text-background font-medium rounded px-1"
         >
           {markedText}
         </mark>
@@ -217,7 +217,7 @@ export function SearchPreview() {
                           {hit.segments.length > 2 && (
                             <button
                               onClick={() => toggleExpand(hit.internal_id)}
-                              className="text-xs flex items-center gap-1 text-primary hover:text-primary font-medium"
+                              className="text-xs flex items-center gap-1 text-foreground hover:text-background font-medium"
                             >
                               {expandedVideos[hit.internal_id] ? (
                                 <>
@@ -245,7 +245,7 @@ export function SearchPreview() {
                 <div className="flex justify-center pt-1">
                   <Link
                     href={`/s?q=${encodeURIComponent(query)}`}
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-primary text-primary-foreground text-sm rounded-md hover:bg-primary transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-foreground text-background text-sm rounded-md hover:bg-background hover:text-foreground transition-colors"
                   >
                     <span>See all {results.length} results</span>
                     <ArrowRight size={14} />

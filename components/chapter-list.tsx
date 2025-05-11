@@ -46,7 +46,7 @@ export function ChapterList({
             <li
               key={chapter.startTimeSeconds} // Use seconds for a more unique key
               onClick={() => onChapterClick(chapter.startTimeSeconds)}
-              className="group cursor-pointer flex space-x-3 p-3 font-semibold hover:bg-primary hover:text-primary-foreground"
+              className="group cursor-pointer flex space-x-3 p-3 font-semibold hover:bg-foreground hover:text-background"
               role="button"
               tabIndex={0} // Make it focusable
               onKeyDown={(e) => {
@@ -60,7 +60,7 @@ export function ChapterList({
                   {idx + 1}
                 </div>
               </div>
-              <div className="relative w-20 h-12 aspect-video flex-shrink-0 overflow-hidden border border-ring group-hover:border-primary">
+              <div className="relative w-20 h-12 aspect-video flex-shrink-0 overflow-hidden border border-ring group-hover:border-foreground">
                 <Image
                   // Consider adding a placeholder/fallback image
                   src={`https://image.mux.com/${playbackId}/thumbnail.png?width=200&height=100&fit_mode=smartcrop&time=${chapter.startTimeSeconds}`}
@@ -83,7 +83,7 @@ export function ChapterList({
                   {chapter.title}
                 </div>
                 <div>
-                  <span className="font-[adaptive-mono] text-muted-foreground group-hover:text-primary-foreground text-xs">
+                  <span className="font-[adaptive-mono] text-muted-foreground group-hover:text-background text-xs">
                     {chapter.startTime}
                   </span>
                 </div>
